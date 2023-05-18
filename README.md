@@ -23,6 +23,8 @@ Dependecies for data generation:
 
 To prototype the experiment, OpenAI's API was used. 
 To run the experiments, an API key must be entered on line 10 of `src/experiment.py`.
+Experiments are run by running the `src/main.py` script.
+In its current state, running the script by default runs the expletive experiment from 0 to 3 shots, with 3 runs of each number of shots, using the 200 expletive examples and the `text-davinci-003` model.
 
 Dependencies for experiments:
 - openai
