@@ -24,10 +24,27 @@ Dependecies for data generation:
 To prototype the experiment, OpenAI's API was used. 
 To run the experiments, an API key must be entered on line 10 of `src/experiment.py`.
 Experiments are run by running the `src/main.py` script.
-In its current state, running the script by default runs the expletive experiment from 0 to 3 shots, with 3 runs of each number of shots, using the 200 expletive examples and the `text-davinci-003` model.
+In its current state, running the script by default runs the expletive experiment from 0 to 3 shots, with 3 runs of each number of shots, using `data/200_expletive_examples.csv` and the `text-davinci-003` model. These can be changed in the script to modify what is run. 
 
 Dependencies for experiments:
 - openai
 - tqdm
 
-## Error analysis
+## Error analysis (WIP)
+
+Tentative error analysis code can be found in `error_analysis.ipynb`. 
+Currently, the code is specified only for expletive infixation.
+The analysis is done in 3 steps:
+1. Does the model's output actually do infixation?
+- Is the infix being inserted internal to the word, or prefixed/suffixed instead?
+- Does the word retain all and only its characters when the infix is removed?
+2. Does the model's output respect syllable boundaries?
+- Correct or not, is the model inserting the infix between syllables? (only applies to expletive and diddly infixation; iz infixation requires insertion between onset and nucleus of a syllable so the heuristic will be different)
+3. Does the model's output adhere to stress pattern?
+- Is insertion happening at the right place?
+
+Following this is a section which uses OpenAI's `tiktoken` to access the token encodings for `text-davinci-002` and `003` to compare the syllabification and tokenization of a test word. This is to see if tokenization has an impact on the model's ability to infix correctly.
+
+Error analysis dependency:
+- pandas
+- tiktoken
